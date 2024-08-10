@@ -1,6 +1,6 @@
 import Colors from "@/constants/Colors";
 import { defaultStyles } from "@/constants/Styles";
-// import { isClerkAPIResponseError, useSignIn } from "@clerk/clerk-expo";
+import { isClerkAPIResponseError, useSignIn } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
@@ -27,43 +27,43 @@ const Page = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const keyboardVerticalOffset = Platform.OS === "ios" ? 80 : 0;
   const router = useRouter();
-  // const { signIn } = useSignIn();
+  const { signIn } = useSignIn();
 
-  // const onSignIn = async (type: SignInType) => {
-  //   if (type === SignInType.Phone) {
-  //     try {
-  //       const fullPhoneNumber = `${countryCode}${phoneNumber}`;
+  const onSignIn = async (type: SignInType) => {
+    if (type === SignInType.Phone) {
+      try {
+        const fullPhoneNumber = `${countryCode}${phoneNumber}`;
 
-  //       const { supportedFirstFactors } = await signIn!.create({
-  //         identifier: fullPhoneNumber,
-  //       });
-  //       const firstPhoneFactor: any = supportedFirstFactors.find(
-  //         (factor: any) => {
-  //           return factor.strategy === "phone_code";
-  //         }
-  //       );
+        const { supportedFirstFactors } = await signIn!.create({
+          identifier: fullPhoneNumber,
+        });
+        const firstPhoneFactor: any = supportedFirstFactors.find(
+          (factor: any) => {
+            return factor.strategy === "phone_code";
+          }
+        );
 
-  //       const { phoneNumberId } = firstPhoneFactor;
+        const { phoneNumberId } = firstPhoneFactor;
 
-  //       await signIn!.prepareFirstFactor({
-  //         strategy: "phone_code",
-  //         phoneNumberId,
-  //       });
+        await signIn!.prepareFirstFactor({
+          strategy: "phone_code",
+          phoneNumberId,
+        });
 
-  //       router.push({
-  //         pathname: "/verify/[phone]",
-  //         params: { phone: fullPhoneNumber, signin: "true" },
-  //       });
-  //     } catch (err) {
-  //       console.log("error", JSON.stringify(err, null, 2));
-  //       if (isClerkAPIResponseError(err)) {
-  //         if (err.errors[0].code === "form_identifier_not_found") {
-  //           Alert.alert("Error", err.errors[0].message);
-  //         }
-  //       }
-  //     }
-  //   }
-  // };
+        router.push({
+          pathname: "/verify/[phone]",
+          params: { phone: fullPhoneNumber, signin: "true" },
+        });
+      } catch (err) {
+        console.log("error", JSON.stringify(err, null, 2));
+        if (isClerkAPIResponseError(err)) {
+          if (err.errors[0].code === "form_identifier_not_found") {
+            Alert.alert("Error", err.errors[0].message);
+          }
+        }
+      }
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -101,7 +101,7 @@ const Page = () => {
             phoneNumber !== "" ? styles.enabled : styles.disabled,
             { marginBottom: 20 },
           ]}
-          // onPress={() => onSignIn(SignInType.Phone)}
+          onPress={() => onSignIn(SignInType.Phone)}
         >
           <Text style={defaultStyles.buttonText}>Continue</Text>
         </TouchableOpacity>
@@ -125,7 +125,7 @@ const Page = () => {
         </View>
 
         <TouchableOpacity
-          // onPress={() => onSignIn(SignInType.Email)}
+          onPress={() => onSignIn(SignInType.Email)}
           style={defaultStyles.pillButton}
           className="flex-row gap-4 mt-5 bg-white"
         >
@@ -136,7 +136,7 @@ const Page = () => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          // onPress={() => onSignIn(SignInType.Google)}
+          onPress={() => onSignIn(SignInType.Google)}
           style={defaultStyles.pillButton}
           className="flex-row gap-4 mt-5 bg-white"
         >
@@ -147,7 +147,7 @@ const Page = () => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          // onPress={() => onSignIn(SignInType.Apple)}
+          onPress={() => onSignIn(SignInType.Apple)}
           style={defaultStyles.pillButton}
           className="flex-row gap-4 mt-5 bg-white"
         >

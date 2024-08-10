@@ -3,8 +3,7 @@ import { defaultStyles } from "@/constants/Styles";
 import { useAssets } from "expo-asset";
 import { ResizeMode, Video } from "expo-av";
 import { Link } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 const Page = () => {
   const [assets] = useAssets([require("@/assets/videos/intro.mp4")]);
@@ -27,7 +26,7 @@ const Page = () => {
       </View>
       <View className="flex-row justify-center gap-5 mb-[60px] px-5">
         <Link
-          href={"./login"}
+          href={"/login"}
           asChild
           style={[
             defaultStyles.pillButton,
@@ -39,7 +38,7 @@ const Page = () => {
           </TouchableOpacity>
         </Link>
         <Link
-          href={"./signup"}
+          href={"/signup"}
           asChild
           style={[
             defaultStyles.pillButton,

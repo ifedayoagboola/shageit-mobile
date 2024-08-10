@@ -1,6 +1,6 @@
 import Colors from "@/constants/Colors";
 import { defaultStyles } from "@/constants/Styles";
-// import { useSignUp } from "@clerk/clerk-expo";
+import { useSignUp } from "@clerk/clerk-expo";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -13,29 +13,29 @@ import {
   Platform,
 } from "react-native";
 const Signup = () => {
-  const [countryCode, setCountryCode] = useState("+49");
+  const [countryCode, setCountryCode] = useState("+44");
   const [phoneNumber, setPhoneNumber] = useState("");
   const keyboardVerticalOffset = Platform.OS === "ios" ? 80 : 0;
   const router = useRouter();
-  //   const { signUp } = useSignUp();
+  const { signUp } = useSignUp();
 
-  //   const onSignup = async () => {
-  //     const fullPhoneNumber = `${countryCode}${phoneNumber}`;
+  const onSignup = async () => {
+    const fullPhoneNumber = `${countryCode}${phoneNumber}`;
 
-  //     try {
-  //       await signUp!.create({
-  //         phoneNumber: fullPhoneNumber,
-  //       });
-  //       signUp!.preparePhoneNumberVerification();
+    try {
+      await signUp!.create({
+        phoneNumber: fullPhoneNumber,
+      });
+      signUp!.preparePhoneNumberVerification();
 
-  //       router.push({
-  //         pathname: "/verify/[phone]",
-  //         params: { phone: fullPhoneNumber },
-  //       });
-  //     } catch (error) {
-  //       console.error("Error signing up:", error);
-  //     }
-  //   };
+      router.push({
+        pathname: "/verify/[phone]",
+        params: { phone: fullPhoneNumber },
+      });
+    } catch (error) {
+      console.error("Error signing up:", error);
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -83,7 +83,7 @@ const Signup = () => {
             phoneNumber !== "" ? styles.enabled : styles.disabled,
             { marginBottom: 20 },
           ]}
-          //   onPress={onSignup}
+          onPress={onSignup}
         >
           <Text style={defaultStyles.buttonText}>Sign up</Text>
         </TouchableOpacity>
