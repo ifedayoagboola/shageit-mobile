@@ -63,7 +63,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const crypto = () => {
+const Page = () => {
   return (
     <View>
       <Text>crypto</Text>
@@ -71,4 +71,4 @@ const crypto = () => {
   );
 };
 
-export default crypto;
+export default Page;
