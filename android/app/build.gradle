@@ -173,6 +173,6 @@ apply from: new File(["node", "--print", "require.resolve('@react-native-communi
 applyNativeModulesAppBuildGradle(project)
 
 project.ext.react = [
-  enableHermes: false,  // If true, enables Hermes.
+  enableHermes: true,  // If true, enables Hermes.
 ]
 
