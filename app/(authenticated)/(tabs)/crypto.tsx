@@ -24,6 +24,7 @@ const Page = () => {
     queryFn: () => fetch(`/api/info?ids=${ids}`).then((res) => res.json()),
     enabled: !!ids,
   });
+  console.log(currencies);
 
   return (
     <ScrollView

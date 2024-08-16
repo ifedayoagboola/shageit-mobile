@@ -14,7 +14,8 @@ export async function GET(request: Request) {
   );
 
   const res = await response.json();
-  return Response.json(res.data);
+  console.log(res.data);
+  // return Response.json(res.data);
   // return Response.json(data);
 }
 
