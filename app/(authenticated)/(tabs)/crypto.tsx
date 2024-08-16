@@ -12,7 +12,8 @@ const Page = () => {
 
   const currencies = useQuery({
     queryKey: ["listings"],
-    queryFn: () => fetch("/api/listings").then((res) => res.json()),
+    queryFn: () =>
+      fetch("http://localhost:8081/api/listings").then((res) => res.json()),
   });
 
   const ids = currencies.data
@@ -21,10 +22,12 @@ const Page = () => {
 
   const { data } = useQuery({
     queryKey: ["info", ids],
-    queryFn: () => fetch(`/api/info?ids=${ids}`).then((res) => res.json()),
+    queryFn: () =>
+      fetch(`http://localhost:8081/api/info?ids=${ids}`).then((res) =>
+        res.json()
+      ),
     enabled: !!ids,
   });
-  console.log(currencies);
 
   return (
     <ScrollView
