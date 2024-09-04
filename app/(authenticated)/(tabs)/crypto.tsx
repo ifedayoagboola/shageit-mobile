@@ -8,12 +8,13 @@ import { defaultStyles } from "@/constants/Styles";
 import { Ionicons } from "@expo/vector-icons";
 
 const Page = () => {
+  const URL = process.env.BASE_URL;
   const headerHeight = useHeaderHeight();
 
   const currencies = useQuery({
     queryKey: ["listings"],
     queryFn: () =>
-      fetch("http://localhost:8081/api/listings").then((res) => res.json()),
+      fetch(`${URL}/api/listings`).then((res) => res.json()),
   });
 
   const ids = currencies.data
@@ -23,7 +24,7 @@ const Page = () => {
   const { data } = useQuery({
     queryKey: ["info", ids],
     queryFn: () =>
-      fetch(`http://localhost:8081/api/info?ids=${ids}`).then((res) =>
+      fetch(`${URL}/api/info?ids=${ids}`).then((res) =>
         res.json()
       ),
     enabled: !!ids,
