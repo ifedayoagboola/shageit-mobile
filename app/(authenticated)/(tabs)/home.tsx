@@ -29,6 +29,7 @@ const Page = () => {
     });
   };
 
+
   return (
     <ScrollView
       style={{ backgroundColor: Colors.background }}

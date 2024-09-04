@@ -7,16 +7,17 @@ import Colors from "@/constants/Colors";
 import { defaultStyles } from "@/constants/Styles";
 import { Ionicons } from "@expo/vector-icons";
 
+import { BASE_URL } from '@env';
+
+
 const Page = () => {
-  const URL = process.env.BASE_URL;
   const headerHeight = useHeaderHeight();
 
   const currencies = useQuery({
     queryKey: ["listings"],
     queryFn: () =>
-      fetch(`${URL}/api/listings`).then((res) => res.json()),
+      fetch(`${BASE_URL}/api/listings`).then((res) => res.json()),
   });
-
   const ids = currencies.data
     ?.map((currency: Currency) => currency.id)
     .join(",");
@@ -24,7 +25,7 @@ const Page = () => {
   const { data } = useQuery({
     queryKey: ["info", ids],
     queryFn: () =>
-      fetch(`${URL}/api/info?ids=${ids}`).then((res) =>
+      fetch(`${BASE_URL}/api/info?ids=${ids}`).then((res) =>
         res.json()
       ),
     enabled: !!ids,

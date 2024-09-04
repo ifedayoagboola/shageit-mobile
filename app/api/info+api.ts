@@ -1,5 +1,4 @@
-const API_KEY = process.env.CRYPTO_API_KEY;
-
+import { CRYPTO_API_KEY } from '@env';
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const ids = url.searchParams.get("ids") || "";
@@ -8,7 +7,7 @@ export async function GET(request: Request) {
     `https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?id=${ids}`,
     {
       headers: {
-        "X-CMC_PRO_API_KEY": API_KEY!,
+        "X-CMC_PRO_API_KEY": CRYPTO_API_KEY!,
       },
     }
   );
