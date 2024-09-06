@@ -1,6 +1,6 @@
-import { CRYPTO_API_KEY } from '@env';
-
+const CRYPTO_API_KEY = process.env.CRYPTO_API_KEY;
 export async function GET(request: Request) {
+
   const url = new URL(request.url);
   const limit = url.searchParams.get("limit") || 5;
 

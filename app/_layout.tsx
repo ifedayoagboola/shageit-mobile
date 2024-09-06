@@ -9,12 +9,15 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { TouchableOpacity, Text, View, ActivityIndicator } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 import * as SecureStore from "expo-secure-store";
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { UserInactivityProvider } from "@/context/UserInactivity";
+
+
+
+
 const queryClient = new QueryClient();
+const clerk_Key = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 
 // Cache the Clerk JWT
 const tokenCache = {
@@ -201,7 +204,7 @@ const InitialLayout = () => {
 const RootLayoutNav = () => {
   return (
     <ClerkProvider
-      publishableKey={CLERK_PUBLISHABLE_KEY!}
+      publishableKey={clerk_Key!}
       tokenCache={tokenCache}
     >
       <QueryClientProvider client={queryClient}>

@@ -7,6 +7,8 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 const Page = () => {
   const [assets] = useAssets([require("@/assets/videos/intro.mp4")]);
+
+  console.log(process.env)
   return (
     <View className="justify-between flex-1">
       {assets && (

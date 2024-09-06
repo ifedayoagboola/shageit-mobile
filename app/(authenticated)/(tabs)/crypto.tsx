@@ -7,8 +7,7 @@ import Colors from "@/constants/Colors";
 import { defaultStyles } from "@/constants/Styles";
 import { Ionicons } from "@expo/vector-icons";
 
-import { BASE_URL } from '@env';
-
+const BASE_URL = process.env.BASE_URL
 
 const Page = () => {
   const headerHeight = useHeaderHeight();
